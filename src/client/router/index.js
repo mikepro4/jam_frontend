@@ -1,6 +1,7 @@
 import React from "react";
 import App from "../App";
 import Home from "../react/pages/home";
+import MyJams from "../react/pages/myjams";
 
 export default [
 	{
@@ -12,6 +13,14 @@ export default [
 				exact: true,
 				params: {
 					name: "home"
+				}
+			},
+			{
+				...MyJams,
+				path: "/myjams",
+				exact: true,
+				params: {
+					name: "myjams"
 				}
 			}
 		]
