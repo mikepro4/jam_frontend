@@ -9,7 +9,7 @@ class JamPreview extends Component {
 	render() {
 		return (
 			<div className="jam-preview-container">
-        preview
+        <Link to={`/jam/${this.props.jam._id}`}>View Jam</Link>
       </div>
 		);
 	}

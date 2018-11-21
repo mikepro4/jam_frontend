@@ -1,30 +1,54 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import classNames from "classnames"
 import posed, { PoseGroup } from 'react-pose';
 
 import Logo from '../svg/logo'
 import MainLinks from '../main_links'
 
+import {
+	createJam
+} from '../../../redux/actions/jamActions'
+
 class Header extends Component {
+	createJam = () => {
+		this.props.createJam( {
+			albumCoverUrl: "",
+      artistName: "Untitled artist nam",
+      artistNameFontSize: "",
+      artistNameFontFamily: "",
+      trackName: "Unititled track name",
+      trackNameFontSize: "",
+      trackNameFontFamily: "",
+      duration: null,
+      audioUrl: "",
+      textColor: "white",
+      controlsColor: "white",
+      textPosition: "bottom_left",
+		}, (data) => {
+			this.props.history.push(`/jam/${data._id}`);
+		})
+	}
 
 	renderAuthButton() {
 		return this.props.user ? (
 			<div className="user-info">
 
-			<a href="/jam/new" className="new-jam-button">
+			<a onClick={() => this.createJam()} className="new-jam-button">
 				Create new jam
 			</a>
 
 			<div className="user-avatar-container">
-				<img
-					className="user-avatar"
-					src={this.props.user.profile.photos[0].value}
-				/>
-				<span className="user-display-name">
-					{this.props.user.profile.displayName}
-				</span>
+				<Link to={`/profile/${this.props.user._id}`}>
+					<img
+						className="user-avatar"
+						src={this.props.user.profile.photos[0].value}
+					/>
+					<span className="user-display-name">
+						{this.props.user.profile.displayName}
+					</span>
+				</Link>
 			</div>
 
 			<a href="/api/logout" className="logout-button">
@@ -70,4 +94,4 @@ function mapStateToProps(state) {
 	};
 }
 
-export default connect(mapStateToProps, {})(Header);
+export default connect(mapStateToProps, {createJam})(withRouter(Header));

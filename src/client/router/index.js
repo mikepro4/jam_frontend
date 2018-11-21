@@ -2,6 +2,8 @@ import React from "react";
 import App from "../App";
 import Home from "../react/pages/home";
 import MyJams from "../react/pages/myjams";
+import Jam from "../react/pages/jam";
+import Profile from "../react/pages/profile";
 
 export default [
 	{
@@ -22,7 +24,23 @@ export default [
 				params: {
 					name: "myjams"
 				}
-			}
+			},
+			{
+				...Jam,
+				path: "/jam/:jamId",
+				exact: true,
+				params: {
+					name: "jam_page"
+				}
+			},
+			{
+				...Profile,
+				path: "/profile/:profileId",
+				exact: true,
+				params: {
+					name: "profile"
+				}
+			},
 		]
 	}
 ];

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import posed, { PoseGroup } from 'react-pose';
 import SplitText from 'react-pose-text';
 
-class HomePage extends Component {
+class JamPage extends Component {
 	state = {
 	};
 
@@ -14,15 +14,15 @@ class HomePage extends Component {
 
 	renderHead = () => (
 		<Helmet>
-			<title>JAM DNA – Home Page</title>
-			<meta property="og:title" content="Homepage" />
+			<title>JAM DNA – Single JAM</title>
+			<meta property="og:title" content="single" />
 		</Helmet>
 	)
 
 	render() {
 		return (
-      <div className="route-container route-home">
-        home
+      <div className="route-container route-jam">
+        jam: {this.props.match.params.jamId}
       </div>
 		);
 	}
@@ -34,5 +34,5 @@ function mapStateToProps({ app }) {
 }
 
 export default {
-	component: connect(mapStateToProps, {})(HomePage)
+	component: connect(mapStateToProps, {})(JamPage)
 }

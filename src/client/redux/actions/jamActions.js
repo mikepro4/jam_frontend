@@ -11,7 +11,7 @@ import {
 
 // =============================================================================
 
-export const createJam = (metadata) => async (dispatch, getState, api) => {
+export const createJam = (metadata, success) => async (dispatch, getState, api) => {
 
   dispatch({
 		type: CREATE_JAM
@@ -25,6 +25,10 @@ export const createJam = (metadata) => async (dispatch, getState, api) => {
 		type: CREATE_JAM_SUCCESS,
 		payload: res.data
 	})
+
+  if (success) {
+		success(res.data);
+	}
 }
 
 // =============================================================================
