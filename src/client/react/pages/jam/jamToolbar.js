@@ -19,14 +19,35 @@ class JamToolbar extends Component {
 
           <ul className="jam-toolbar-buttons">
             <li className="jam-toolbar-button-container">
-              <button className="jam-toolbar-button" onClick={() => this.props.toggleAudioSettings()}>Audio settings</button>
+              <button
+								className={classNames({
+									"jam-toolbar-button-active": this.props.jamScreen.audioSettingsVisible
+								}, "jam-toolbar-button")}
+								onClick={() => this.props.toggleAudioSettings()}
+							>
+								Audio settings
+							</button>
             </li>
             <li className="jam-toolbar-button-container">
-              <button className="jam-toolbar-button" onClick={() => this.props.toggleJamMetadata()}>Jam metadata</button>
+              <button
+								className={classNames({
+									"jam-toolbar-button-active": this.props.jamScreen.jamMetadataVisible
+								}, "jam-toolbar-button")}
+								onClick={() => this.props.toggleJamMetadata()}
+							>
+								Jam metadata
+							</button>
             </li>
 
             <li className="jam-toolbar-button-container">
-              <button className="jam-toolbar-button" onClick={() => this.props.toggleVizSettings()}>Viz settings</button>
+              <button
+								className={classNames({
+									"jam-toolbar-button-active": this.props.jamScreen.vizSettingsVisible
+								}, "jam-toolbar-button")}
+								onClick={() => this.props.toggleVizSettings()}
+							>
+								Viz settings
+							</button>
             </li>
           </ul>
 

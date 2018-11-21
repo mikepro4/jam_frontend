@@ -14,6 +14,21 @@
       flex-grow: 1;
       display: flex;
       align-items: center;
+
+      .jam-toolbar-button {
+        background: none;
+        border: none;
+        outline: none;
+        padding: 5px 10px;
+        color: rgba($white, 0.5);
+        border-radius: 3px;
+        font-family: "Jam", sans-serif;
+
+        &.jam-toolbar-button-active {
+          color: $white;
+          background: rgba($white, 0.2);
+        }
+      }
     }
   }
 }
