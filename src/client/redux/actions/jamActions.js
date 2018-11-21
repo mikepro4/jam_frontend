@@ -6,7 +6,9 @@ import {
   SEARCH_JAMS_SUCCESS,
   CREATE_JAM,
 	CREATE_JAM_SUCCESS,
-  DELETE_JAM
+  DELETE_JAM,
+  LOAD_JAM_SUCCESS,
+  CLEAR_CURRENT_JAM
 } from "../actions/types";
 
 // =============================================================================
@@ -92,6 +94,43 @@ export const updateJam = (jamId, newJam, success) => async (
 		jamId,
 		newJam
 	});
+	if (success) {
+		success(response.data);
+	}
+};
+
+// =============================================================================
+
+export const loadJam = (jamId, success) => async (
+	dispatch,
+	getState,
+	api
+) => {
+
+	const response = await api.post("/jams/details", { jamId });
+  if(response) {
+    dispatch({
+      type: LOAD_JAM_SUCCESS,
+      payload: response.data
+    });
+  }
+	if (success) {
+		success(response.data);
+	}
+};
+
+// =============================================================================
+
+export const clearCurrentJam = (success) => async (
+	dispatch,
+	getState,
+	api
+) => {
+
+  dispatch({
+    type: CLEAR_CURRENT_JAM
+  });
+
 	if (success) {
 		success(response.data);
 	}

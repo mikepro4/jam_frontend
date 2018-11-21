@@ -3,7 +3,9 @@ import {
   SEARCH_JAMS_SUCCESS,
   CREATE_JAM,
 	CREATE_JAM_SUCCESS,
-  DELETE_JAM
+  DELETE_JAM,
+  LOAD_JAM_SUCCESS,
+  CLEAR_CURRENT_JAM
 } from "../actions/types";
 
 export const initialState = {
@@ -35,7 +37,6 @@ export const jamsReducer = (state = initialState, action) => {
 		case CREATE_JAM_SUCCESS:
 			return {
 				...state,
-				currentJam: action.payload,
         loading: false,
         updateCollection: true
 			}
@@ -43,6 +44,16 @@ export const jamsReducer = (state = initialState, action) => {
       return {
         ...state,
         updateCollection: true
+      }
+    case LOAD_JAM_SUCCESS:
+      return {
+        ...state,
+        currentJam: action.payload
+      }
+    case CLEAR_CURRENT_JAM:
+      return {
+        ...state,
+        currentJam: {}
       }
 		default:
 			return state;

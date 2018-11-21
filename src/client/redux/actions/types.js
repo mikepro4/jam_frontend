@@ -11,5 +11,7 @@ export const CREATE_JAM_SUCCESS = "app/CREATE_JAM_SUCCESS";
 export const DELETE_JAM = "app/DELETE_JAM";
 export const SEARCH_JAMS = "app/SEARCH_JAMS";
 export const SEARCH_JAMS_SUCCESS = "app/SEARCH_JAMS_SUCCESS";
+export const LOAD_JAM_SUCCESS = "app/LOAD_JAM_SUCCESS";
+export const CLEAR_CURRENT_JAM = "app/CLEAR_CURRENT_JAM";
 
 // =============================================================================
