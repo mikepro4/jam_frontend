@@ -1,0 +1,49 @@
+.app-header {
+  position: fixed;
+  top: 0;
+  height: $headerHeight;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: $black1;
+  display: flex;
+  justify-content: space-between;
+
+  .header-left {
+    display: flex;
+
+    .main-links-container {
+      display: flex;
+      margin: 0 0 0 40px;
+
+      ul.main-links {
+        display: flex;
+
+        li.main-link-container {
+          margin: 0 20px 0 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: relative;
+          top: -1px;
+        }
+      }
+    }
+  }
+
+  .app-logo {
+    display: flex;
+    align-items: center;
+    margin: 0 0 0 20px;
+
+    a {
+      position: relative;
+      top: -1px;
+    }
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+  }
+}

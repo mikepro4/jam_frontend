@@ -12,6 +12,13 @@
 @import "./imports/blueprint_overides";
 @import "./imports/animations";
 
+// pages
+@import "../App";
+@import "../react/pages/home/index";
+
+//components
+@import "../react/components/header/index";
+
 html {
 	// overflow: hidden;
 	// overflow-y: scroll;

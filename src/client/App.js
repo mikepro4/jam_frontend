@@ -12,6 +12,8 @@ import { Link } from "react-router-dom";
 
 FocusStyleManager.onlyShowFocusOnTabs();
 
+import Header from "./react/components/header"
+
 class App extends Component {
 	state = {
 	};
@@ -24,6 +26,8 @@ class App extends Component {
 			<div className="app">
 
 				<div className="app-container">
+
+					<Header/ >
 
 					<div className="app-content">
 						{renderRoutes(this.props.route.routes)}
