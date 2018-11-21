@@ -14,7 +14,9 @@ class JamToolbar extends Component {
 	render() {
 		return (
       <div className="jam-toolbar">
+
         <div className="jam-toolbar-left">
+
           <ul className="jam-toolbar-buttons">
             <li className="jam-toolbar-button-container">
               <button className="jam-toolbar-button" onClick={() => this.props.toggleAudioSettings()}>Audio settings</button>
@@ -27,7 +29,13 @@ class JamToolbar extends Component {
               <button className="jam-toolbar-button" onClick={() => this.props.toggleVizSettings()}>Viz settings</button>
             </li>
           </ul>
+					
         </div>
+
+				<div className="jam-toolbar-right">
+					right content
+				</div>
+
       </div>
 		);
 	}

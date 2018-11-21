@@ -1,0 +1,19 @@
+.jam-toolbar {
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+
+  ul.jam-toolbar-buttons {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    margin: 0 0 0 10px;
+
+    li.jam-toolbar-button-container {
+      margin: 0 20px 0 0;
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+    }
+  }
+}
