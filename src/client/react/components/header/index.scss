@@ -25,7 +25,6 @@
           align-items: center;
           justify-content: center;
           position: relative;
-          top: -1px;
         }
       }
     }
@@ -35,15 +34,37 @@
     display: flex;
     align-items: center;
     margin: 0 0 0 20px;
-
-    a {
-      position: relative;
-      top: -1px;
-    }
   }
 
   .header-right {
     display: flex;
     align-items: center;
+    margin: 0 20px 0 0;
+  }
+
+  .user-info {
+    display: flex;
+    align-items: center;
+
+    .user-avatar-container {
+      display: flex;
+      align-items: center;
+      margin: 0 20px 0 0;
+
+      .user-avatar {
+        width: 25px;
+        height: 25px;
+        border-radius: 50px;
+        margin: 0 10px 0 0;
+      }
+
+      .user-display-name {
+        font-size: 14px;
+      }
+    }
+
+    .new-jam-button {
+      margin: 0 20px 0 0;
+    }
   }
 }
