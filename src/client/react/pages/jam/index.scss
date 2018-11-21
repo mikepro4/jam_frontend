@@ -1,0 +1,47 @@
+.route-jam {
+
+  .jam-container {
+    position: fixed;
+    top: $headerHeight;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 1;
+  }
+
+  .jam-visualization {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+  }
+
+  .jam-bottom-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 3;
+    background: rgba($black1, 0.9);
+  }
+
+  .jam-main-timeline-container {
+    padding: 10px;
+    height: 64px;
+    border-bottom: 1px solid rgba($white, 0.05)
+  }
+
+  .jam-sections-container {
+    .jam-section {
+      min-height: 100px;
+      padding: 0 10px 0 10px;
+      border-bottom: 1px solid rgba($white, 0.05)
+    }
+  }
+
+  .jam-toolbar {
+    height: 50px;
+  }
+}

@@ -8,7 +8,10 @@ import {
 	CREATE_JAM_SUCCESS,
   DELETE_JAM,
   LOAD_JAM_SUCCESS,
-  CLEAR_CURRENT_JAM
+  CLEAR_CURRENT_JAM,
+  TOGGLE_AUDIO_SETTINGS,
+  TOGGLE_JAM_METADATA,
+  TOGGLE_VIZ_SETTINGS
 } from "../actions/types";
 
 // =============================================================================
@@ -122,9 +125,7 @@ export const loadJam = (jamId, success) => async (
 // =============================================================================
 
 export const clearCurrentJam = (success) => async (
-	dispatch,
-	getState,
-	api
+	dispatch
 ) => {
 
   dispatch({
@@ -134,4 +135,33 @@ export const clearCurrentJam = (success) => async (
 	if (success) {
 		success(response.data);
 	}
+};
+
+// =============================================================================
+
+export const toggleAudioSettings = () => async (
+	dispatch
+) => {
+
+  dispatch({
+    type: TOGGLE_AUDIO_SETTINGS
+  });
+};
+
+export const toggleJamMetadata = () => async (
+	dispatch
+) => {
+
+  dispatch({
+    type: TOGGLE_JAM_METADATA
+  });
+};
+
+export const toggleVizSettings = () => async (
+	dispatch
+) => {
+
+  dispatch({
+    type: TOGGLE_VIZ_SETTINGS
+  });
 };

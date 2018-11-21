@@ -10,6 +10,11 @@ import {
   clearCurrentJam
 } from '../../../redux/actions/jamActions'
 
+import JamToolbar from './jamToolbar'
+import AudioSettings from './audioSettings'
+import MetadataSettings from './metadataSettings'
+import VizSettings from './vizSettings'
+
 class JamPage extends Component {
 
   static loadData(store, match) {
@@ -37,7 +42,23 @@ class JamPage extends Component {
 	render() {
 		return (
       <div className="route-container route-jam">
-        jam: {this.props.currentJam._id}
+				{this.renderHead()}
+				<div className="jam-container">
+					<div className="jam-visualization"/>
+					<div className="jam-bottom-container">
+						<div className="jam-main-timeline-container">
+							main timeline
+						</div>
+
+						<div className="jam-sections-container">
+							<AudioSettings />
+							<MetadataSettings />
+							<VizSettings />
+						</div>
+
+						<JamToolbar />
+					</div>
+				</div>
       </div>
 		);
 	}
