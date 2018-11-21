@@ -14,11 +14,20 @@ FocusStyleManager.onlyShowFocusOnTabs();
 
 import Header from "./react/components/header"
 
+import {
+	fetchCurrentUser
+} from "./redux/actions/appActions";
+
 class App extends Component {
+	static loadData(store, match) {
+		return store.dispatch(fetchCurrentUser());
+	}
+
 	state = {
 	};
 
 	componentDidMount() {
+		this.props.fetchCurrentUser();
 	}
 
 	render() {
@@ -42,10 +51,13 @@ class App extends Component {
 
 function mapStateToProps(state) {
 	return {
+		location: state.router.location,
+		auth: state.app.user
 	};
 }
 
 export default {
 	component: connect(mapStateToProps, {
+		fetchCurrentUser
 	})(withRouter(App))
 };
