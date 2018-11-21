@@ -29,7 +29,7 @@ class JamToolbar extends Component {
               <button className="jam-toolbar-button" onClick={() => this.props.toggleVizSettings()}>Viz settings</button>
             </li>
           </ul>
-					
+
         </div>
 
 				<div className="jam-toolbar-right">

@@ -32,6 +32,12 @@ class JamPage extends Component {
     this.props.clearCurrentJam()
 	}
 
+	componentDidUpdate(prevprops) {
+		if(prevprops.match.params.jamId !== this.props.match.params.jamId) {
+			this.props.loadJam(this.props.match.params.jamId)
+		}
+	}
+
 	renderHead = () => (
 		<Helmet>
 			<title>JAM DNA – Single JAM</title>
