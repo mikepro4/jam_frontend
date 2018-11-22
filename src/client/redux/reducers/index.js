@@ -4,11 +4,13 @@ import { routerReducer } from "react-router-redux";
 import { appReducer } from "./appReducer";
 import { jamsReducer } from "./jamsReducer";
 import { playerReducer } from "./playerReducer";
+import { vizReducer } from "./vizReducer";
 
 const REDUCERS_OBJECT = {
 	app: appReducer,
 	form: formReducer,
 	jams: jamsReducer,
+	viz: vizReducer,
 	player: playerReducer,
 	router: routerReducer,
 };
