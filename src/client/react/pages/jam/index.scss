@@ -27,17 +27,11 @@
     background: rgba($black1, 0.9);
   }
 
-  .jam-main-timeline-container {
-    padding: 10px;
-    height: 64px;
-    border-bottom: 1px solid rgba($white, 0.05)
-  }
-
   .jam-sections-container {
     .jam-section {
       min-height: 100px;
       padding: 0 10px 0 10px;
       border-bottom: 1px solid rgba($white, 0.05)
     }
-  }  
+  }
 }

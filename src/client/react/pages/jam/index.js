@@ -10,13 +10,13 @@ import {
   clearCurrentJam
 } from '../../../redux/actions/jamActions'
 
+import Timeline from './timeline'
 import JamToolbar from './jamToolbar'
 import AudioSettings from './audioSettings'
 import MetadataSettings from './metadataSettings'
 import VizSettings from './vizSettings'
 
 class JamPage extends Component {
-
   static loadData(store, match) {
 		return store.dispatch(loadJam(match.params.jamId));
 	}
@@ -52,9 +52,7 @@ class JamPage extends Component {
 				<div className="jam-container">
 					<div className="jam-visualization"/>
 					<div className="jam-bottom-container">
-						<div className="jam-main-timeline-container">
-							main timeline
-						</div>
+						<Timeline />
 
 						<div className="jam-sections-container">
 							<AudioSettings />
