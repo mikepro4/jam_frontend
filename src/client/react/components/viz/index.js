@@ -29,7 +29,7 @@ class Viz extends Component {
 
 	componentDidMount = () => {
 		if(this.props.currentJam._id) {
-			this.updateDimensions()
+			this.startViz()
 		}
 		window.addEventListener("resize", this.handleResize);
   }
@@ -40,45 +40,35 @@ class Viz extends Component {
 	}
 
 	handleResize = () => {
-		let rect = this.refs.viz_container.getBoundingClientRect();
-
-		this.setState({
-			width: rect.width * 2,
-			height: rect.height * 2,
-			radius: (rect.width * 2) / 5,
-			rectWidth: rect.width * 2,
-			rectHeight: rect.height * 2,
-			rectRadius: (rect.width * 2) / 5,
-			x: (rect.width * 2) / 2,
-			y: (rect.height * 2) / 2
-		}, () => {
-			this.generatePoints()
-		})
+		this.updateDimensions(this.generatePoints)
 	}
 
 	componentDidUpdate = (prevprops) => {
 		if(prevprops.currentJam._id !== this.props.currentJam._id) {
-			this.updateDimensions()
+			this.startViz()
 		}
 	}
 
-	updateDimensions = () => {
-		console.log('update')
-    let rect = this.refs.viz_container.getBoundingClientRect();
+	startViz = () => {
+		this.updateDimensions(this.updateViz)
+  }
 
-    this.setState({
+	updateDimensions = (callback) => {
+		let rect = this.refs.viz_container.getBoundingClientRect();
+
+		this.setState({
       width: rect.width * 2,
       height: rect.height * 2,
-      radius: (rect.width * 2) / 5,
+      radius: (rect.width * 2) / 5.5,
       rectWidth: rect.width * 2,
       rectHeight: rect.height * 2,
       rectRadius: (rect.width * 2) / 5,
 			x: (rect.width * 2) / 2,
 			y: (rect.height * 2) / 2
     }, () => {
-      this.updateViz()
+      callback()
     })
-  }
+	}
 
 	updateViz = () => {
 
