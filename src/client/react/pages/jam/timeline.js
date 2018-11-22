@@ -7,29 +7,34 @@ import { Icon } from "@blueprintjs/core";
 
 class Timeline extends Component {
 	render() {
-    return (
-      <div className="jam-main-timeline-container">
-        <div className="timeline-left">
-					<div className="play-button">
-          	<Icon icon="play" iconSize={20} />
-					</div>
 
-					<div className="jam-title-container">
-						<div className="artist-name">
-							{this.props.currentJam.metadata.artistName}
+		if(this.props.currentJam.metadata) {
+			return (
+	      <div className="jam-main-timeline-container">
+	        <div className="timeline-left">
+						<div className="play-button">
+	          	<Icon icon="play" iconSize={20} />
 						</div>
 
-						<div className="track-name">
-							{this.props.currentJam.metadata.trackName}
-						</div>
-					</div>
-        </div>
+						<div className="jam-title-container">
+							<div className="artist-name">
+								{this.props.currentJam.metadata.artistName}
+							</div>
 
-        <div className="timeline-right">
-          timeline right
-        </div>
-      </div>
-		);
+							<div className="track-name">
+								{this.props.currentJam.metadata.trackName}
+							</div>
+						</div>
+	        </div>
+
+	        <div className="timeline-right">
+	          timeline right
+	        </div>
+	      </div>
+			);
+		} else {
+			return ""
+		}
 	}
 }
 
