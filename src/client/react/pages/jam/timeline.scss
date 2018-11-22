@@ -10,6 +10,7 @@
     flex-shrink: 0;
     display: flex;
     justify-content: center;
+    user-select: none;
 
     .play-button {
       width: 40px;

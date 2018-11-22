@@ -5,16 +5,37 @@ import classNames from "classnames"
 import posed, { PoseGroup } from 'react-pose';
 import { Icon } from "@blueprintjs/core";
 
+import {
+	trackPlay,
+	trackPause,
+	trackSeek
+} from '../../../redux/actions/playerActions'
+
 class Timeline extends Component {
+
+	renderPlayPauseButton = () => {
+		if(this.props.player.status == "pause" || this.props.player.status == "stop") {
+			return (
+				<div className="play-button" onClick={() => this.props.trackPlay(this.props.currentJam)}>
+					<Icon icon="play" iconSize={20} />
+				</div>
+			)
+		} else if (this.props.player.status == "play") {
+			return (
+				<div className="play-button" onClick={() => this.props.trackPause(this.props.currentJam)}>
+					<Icon icon="pause" iconSize={20} />
+				</div>
+			)
+		}
+	}
+
 	render() {
 
 		if(this.props.currentJam.metadata) {
 			return (
 	      <div className="jam-main-timeline-container">
 	        <div className="timeline-left">
-						<div className="play-button">
-	          	<Icon icon="play" iconSize={20} />
-						</div>
+						{this.renderPlayPauseButton()}
 
 						<div className="jam-title-container">
 							<div className="artist-name">
@@ -43,9 +64,13 @@ function mapStateToProps(state) {
 		user: state.app.user,
 		location: state.router.location,
     jamScreen: state.jams.jamScreen,
-    currentJam: state.jams.currentJam
+    currentJam: state.jams.currentJam,
+		player: state.player
 	};
 }
 
 export default connect(mapStateToProps, {
+	trackPlay,
+	trackPause,
+	trackSeek
 })(withRouter(Timeline));

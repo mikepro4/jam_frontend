@@ -13,6 +13,8 @@ import { Link } from "react-router-dom";
 FocusStyleManager.onlyShowFocusOnTabs();
 
 import Header from "./react/components/header"
+import Player from "./react/components/player"
+
 
 import {
 	fetchCurrentUser
@@ -37,6 +39,8 @@ class App extends Component {
 				<div className="app-container">
 
 					<Header/ >
+
+					<Player/>
 
 					<div className="app-content">
 						{renderRoutes(this.props.route.routes)}

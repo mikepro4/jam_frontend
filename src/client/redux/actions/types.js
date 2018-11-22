@@ -19,3 +19,15 @@ export const TOGGLE_JAM_METADATA = "app/TOGGLE_JAM_METADATA";
 export const TOGGLE_VIZ_SETTINGS = "app/TOGGLE_VIZ_SETTINGS";
 
 // =============================================================================
+
+// Player
+
+export const TRACK_LOAD = "app/TRACK_LOAD";
+export const TRACK_PLAY = "app/TRACK_PLAY";
+export const TRACK_PAUSE = "app/TRACK_PAUSE";
+export const TRACK_STOP = "app/TRACK_STOP";
+export const TRACK_SEEK = "app/TRACK_SEEK";
+export const TRACK_PLAYING = "app/TRACK_PLAYING";
+export const SET_ANALYSER = "app/SET_ANALYSER"
+
+// =============================================================================
