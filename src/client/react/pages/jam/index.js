@@ -16,6 +16,8 @@ import AudioSettings from './audioSettings'
 import MetadataSettings from './metadataSettings'
 import VizSettings from './vizSettings'
 
+import Viz from '../../components/viz'
+
 class JamPage extends Component {
   static loadData(store, match) {
 		return store.dispatch(loadJam(match.params.jamId));
@@ -50,7 +52,7 @@ class JamPage extends Component {
       <div className="route-container route-jam">
 				{this.renderHead()}
 				<div className="jam-container">
-					<div className="jam-visualization"/>
+					<div className="jam-visualization"><Viz/></div>
 					<div className="jam-bottom-container">
 						<Timeline />
 

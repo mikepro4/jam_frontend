@@ -30,7 +30,6 @@ class Jam extends Component {
 				let audioSrc = context.createMediaElementSource(audio);
 				audioSrc.connect(analyser);
 				audioSrc.connect(context.destination);
-				console.log("componentDidUpdate: ", analyser)
 				this.props.setAnalyser(analyser)
 			}
     }
@@ -117,4 +116,7 @@ function mapStateToProps(state) {
 	};
 }
 
-export default connect(mapStateToProps, {trackPlaying, setAnalyser})(Jam);
+export default connect(mapStateToProps, {
+	trackPlaying,
+	setAnalyser
+})(Jam);
