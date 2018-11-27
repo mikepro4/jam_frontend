@@ -5,6 +5,7 @@ import { appReducer } from "./appReducer";
 import { jamsReducer } from "./jamsReducer";
 import { playerReducer } from "./playerReducer";
 import { vizReducer } from "./vizReducer";
+import { fileUploadReducer } from "./fileUploadReducer";
 
 const REDUCERS_OBJECT = {
 	app: appReducer,
@@ -12,6 +13,7 @@ const REDUCERS_OBJECT = {
 	jams: jamsReducer,
 	viz: vizReducer,
 	player: playerReducer,
+	fileUpload: fileUploadReducer,
 	router: routerReducer,
 };
 

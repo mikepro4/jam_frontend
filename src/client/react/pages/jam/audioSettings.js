@@ -4,12 +4,18 @@ import { withRouter, Link } from "react-router-dom";
 import classNames from "classnames"
 import posed, { PoseGroup } from 'react-pose';
 
+import AudioUploader from '../../components/audio_uploader'
 
 class AudioSettings extends Component {
 	render() {
     if(this.props.jamScreen.audioSettingsVisible) {
       return (
-        <div className="jam-section jam-audio-settings">audio settings</div>
+        <div className="jam-section jam-audio-settings">
+				audio settings
+
+				<AudioUploader/>
+
+				</div>
   		);
     } else {
       return ""

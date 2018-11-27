@@ -40,7 +40,7 @@ class Viz extends Component {
 	}
 
 	handleResize = () => {
-		this.updateDimensions(this.generatePoints)
+		this.updateDimensions()
 	}
 
 	componentDidUpdate = (prevprops) => {
@@ -59,14 +59,16 @@ class Viz extends Component {
 		this.setState({
       width: rect.width * 2,
       height: rect.height * 2,
-      radius: (rect.width * 2) / 5.5,
+      radius: (rect.width * 2) / 6,
       rectWidth: rect.width * 2,
       rectHeight: rect.height * 2,
       rectRadius: (rect.width * 2) / 5,
 			x: (rect.width * 2) / 2,
 			y: (rect.height * 2) / 2
     }, () => {
-      callback()
+			if(callback) {
+				callback()
+			}
     })
 	}
 
@@ -124,7 +126,6 @@ class Viz extends Component {
     ctx.fillStyle = "rgba(0, 0, 0, 0)";
     ctx.width = this.state.width;
     ctx.height = this.state.height;
-    let points = this.generatePoints()
     this.update();
   }
 
@@ -138,11 +139,6 @@ class Viz extends Component {
       );
       points.push(pt)
     }
-    this.setState({
-      points: points
-    }, () => {
-      // this.renderOnce(this.refs.canvas.getContext('2d'))
-    })
 
     return points
   }
@@ -158,10 +154,11 @@ class Viz extends Component {
   }
 
 	update = () => {
-    this.renderFrame(this.refs.canvas.getContext('2d'))
+		let points = this.generatePoints()
+    this.renderFrame(this.refs.canvas.getContext('2d'), points)
   }
 
-	renderOnce = (ctx) => {
+	renderOnce = (ctx, points) => {
 		ctx.clearRect(0, 0, this.state.width, this.state.height);
 
     this.setState({
@@ -175,7 +172,7 @@ class Viz extends Component {
       this.props.player.analyser.getByteFrequencyData(freqData)
     }
 
-    for (let i = 0; i < this.state.points.length; i++) {
+    for (let i = 0; i < points.length; i++) {
 
 			let soundModifier
 
@@ -193,7 +190,7 @@ class Viz extends Component {
         soundModifier = 1
       }
 
-      let point = this.state.points[i];
+      let point = points[i];
 
 			let t_radius
 
@@ -242,13 +239,13 @@ class Viz extends Component {
     }
   }
 
-	renderFrame = (ctx) => {
+	renderFrame = (ctx, points) => {
     // if(this.props.currentJam._id == this.props.player.jamId) {
-      this.renderOnce(ctx)
+      this.renderOnce(ctx, points)
     // }
 
 		this.setState({
-			requestAnimationFrame: requestAnimationFrame(() => this.renderFrame(ctx))
+			requestAnimationFrame: requestAnimationFrame(() => this.renderFrame(ctx, points))
 		})
   }
 

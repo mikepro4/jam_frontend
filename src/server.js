@@ -3,6 +3,7 @@ import path from "path";
 import { matchRoutes } from "react-router-config";
 import proxy from "express-http-proxy";
 import axios from "axios";
+const bodyParser = require("body-parser");
 import { ConnectedRouter, push } from "react-router-redux";
 
 import Router from "./client/router";
@@ -19,6 +20,9 @@ const PUBLIC_DIR = "public";
 const STATIC_DIR = "static";
 
 const app = express();
+
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
 app.use(
 	PROXY_ROUTE,

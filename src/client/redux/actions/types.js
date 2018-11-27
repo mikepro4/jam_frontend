@@ -31,3 +31,11 @@ export const TRACK_PLAYING = "app/TRACK_PLAYING";
 export const SET_ANALYSER = "app/SET_ANALYSER"
 
 // =============================================================================
+
+// File uploader
+
+export const UPLOAD_AUDIO = "app/UPLOAD_AUDIO";
+export const UPLOAD_AUDIO_SUCCESS = "app/UPLOAD_AUDIO_SUCCESS";
+export const UPLOAD_AUDIO_ERROR = "app/UPLOAD_AUDIO_ERROR";
+
+// =============================================================================
