@@ -9,7 +9,11 @@ class JamPreview extends Component {
 	render() {
 		return (
 			<div className="jam-preview-container">
-        <Link to={`/jam/${this.props.jam._id}`}>View Jam</Link>
+        <Link to={`/jam/${this.props.jam._id}`}>
+
+					{this.props.jam.metadata.artistName} – {this.props.jam.metadata.trackName}
+
+				</Link>
       </div>
 		);
 	}

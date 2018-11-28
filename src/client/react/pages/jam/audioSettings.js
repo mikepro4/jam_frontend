@@ -13,7 +13,7 @@ class AudioSettings extends Component {
         <div className="jam-section jam-audio-settings">
 				audio settings
 
-				<AudioUploader/>
+					<AudioUploader onComplete={(sound) => this.props.onAudioUpdate(sound)}/>
 
 				</div>
   		);

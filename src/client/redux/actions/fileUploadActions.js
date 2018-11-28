@@ -15,8 +15,6 @@ export const uploadAudioFile = (file, success) => async (dispatch, getState, api
 		payload: file
 	})
 
-  console.log(file)
-
   const formData = new FormData();
   formData.append("file", file);
 
@@ -26,14 +24,13 @@ export const uploadAudioFile = (file, success) => async (dispatch, getState, api
     { headers: { 'Content-Type': 'multipart/form-data' } }
   ).then(response => {
     if (response.status === 200 && response.data) {
-      console.log(response);
       dispatch({
     		type: UPLOAD_AUDIO_SUCCESS,
     		payload: response.data
     	})
 
       if(success) {
-        success()
+        success(response.data.result)
       }
     }
   }).catch(error => {

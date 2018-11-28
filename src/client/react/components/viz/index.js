@@ -177,11 +177,7 @@ class Viz extends Component {
 			let soundModifier
 
       if(this.props.player.analyser) {
-        if (i <= 1024) {
-          soundModifier = freqData[i]/2
-        } else {
-          soundModifier = freqData[i-1024]/2
-        }
+        soundModifier = freqData[this.getPointIterator(i)]/2
 
         if(soundModifier == 0) {
           soundModifier = 1
@@ -228,21 +224,36 @@ class Viz extends Component {
       point.vx *= this.state.friction ;
       point.vy *= this.state.friction ;
 
+
       if (point.x >= 0 && point.x <= this.state.width && point.y >= 0 && point.y <= this.state.height) {
         // ctx.fillRect(point.x, point.y, this.state.pointSize, this.state.pointSize);
 				ctx.beginPath();
 
 				ctx.arc(point.x,point.y,this.state.pointSize,0,2*Math.PI);
-				ctx.fillStyle = `rgba(255,255,255,${this.state.pointOpacity})`;
+				ctx.fillStyle = `rgba(255,255,255,${this.getPointOpacity(freqData[this.getPointIterator(i)])}`;
 				ctx.fill();
       }
     }
   }
 
+	getPointIterator = (i) => {
+		if (i <= 1024) {
+			return i
+		} else {
+			return i-1024
+		}
+	}
+
+	getPointOpacity = (value) => {
+		if(value > 0) {
+			return value/256*10
+		} else {
+			return 0.5
+		}
+	}
+
 	renderFrame = (ctx, points) => {
-    // if(this.props.currentJam._id == this.props.player.jamId) {
-      this.renderOnce(ctx, points)
-    // }
+    this.renderOnce(ctx, points)
 
 		this.setState({
 			requestAnimationFrame: requestAnimationFrame(() => this.renderFrame(ctx, points))

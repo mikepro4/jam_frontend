@@ -7,7 +7,8 @@ import SplitText from 'react-pose-text';
 
 import {
 	loadJam,
-  clearCurrentJam
+  clearCurrentJam,
+	updateJam
 } from '../../../redux/actions/jamActions'
 
 import Timeline from './timeline'
@@ -47,6 +48,27 @@ class JamPage extends Component {
 		</Helmet>
 	)
 
+	updateJamAudio = (sound) => {
+		let newJam = {
+			...this.props.currentJam,
+			metadata: {
+				...this.props.currentJam.metadata,
+				duration: sound.duration,
+				audioUrl: sound.url
+			}
+		}
+
+		this.props.updateJam(this.props.currentJam._id, newJam)
+	}
+
+	updateJamMetadata = (metadata) => {
+		console.log(metadata)
+	}
+
+	updateJamViz = (viz) => {
+		console.log(viz)
+	}
+
 	render() {
 		return (
       <div className="route-container route-jam">
@@ -57,9 +79,9 @@ class JamPage extends Component {
 						<Timeline />
 
 						<div className="jam-sections-container">
-							<AudioSettings />
-							<MetadataSettings />
-							<VizSettings />
+							<AudioSettings onAudioUpdate={(sound) => this.updateJamAudio(sound)}/>
+							<MetadataSettings onMetadataUpdate={(metadata) => this.updateJamMetadata(metadata)} />
+							<VizSettings onVizUpdate={(viz) => this.updateJamViz(viz)} />
 						</div>
 
 						<JamToolbar />
@@ -79,6 +101,7 @@ function mapStateToProps(state) {
 export default {
 	component: connect(mapStateToProps, {
     loadJam,
-    clearCurrentJam
+    clearCurrentJam,
+		updateJam
   })(JamPage)
 }

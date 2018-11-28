@@ -8,7 +8,9 @@ import {
   CLEAR_CURRENT_JAM,
   TOGGLE_AUDIO_SETTINGS,
   TOGGLE_JAM_METADATA,
-  TOGGLE_VIZ_SETTINGS
+  TOGGLE_VIZ_SETTINGS,
+  UPDATE_JAM,
+  UPDATE_JAM_SUCCESS
 } from "../actions/types";
 
 export const initialState = {
@@ -22,8 +24,6 @@ export const initialState = {
     vizSettingsVisible: false
   }
 };
-
-let newJamScreen
 
 export const jamsReducer = (state = initialState, action) => {
 	switch (action.type) {
@@ -66,32 +66,40 @@ export const jamsReducer = (state = initialState, action) => {
         currentJam: {}
       };
     case TOGGLE_AUDIO_SETTINGS:
-      newJamScreen = {
-        ...state.jamScreen,
-        audioSettingsVisible: !state.jamScreen.audioSettingsVisible
-      }
       return {
         ...state,
-        jamScreen: newJamScreen
+        jamScreen: {
+          ...state.jamScreen,
+          audioSettingsVisible: !state.jamScreen.audioSettingsVisible
+        }
       };
     case TOGGLE_JAM_METADATA:
-      newJamScreen = {
-        ...state.jamScreen,
-        jamMetadataVisible: !state.jamScreen.jamMetadataVisible
-      }
       return {
         ...state,
-        jamScreen: newJamScreen
+        jamScreen: {
+          ...state.jamScreen,
+          jamMetadataVisible: !state.jamScreen.jamMetadataVisible
+        }
       };
     case TOGGLE_VIZ_SETTINGS:
-      newJamScreen = {
-        ...state.jamScreen,
-        vizSettingsVisible: !state.jamScreen.vizSettingsVisible
-      }
       return {
         ...state,
-        jamScreen: newJamScreen
+        jamScreen: {
+          ...state.jamScreen,
+          vizSettingsVisible: !state.jamScreen.vizSettingsVisible
+        }
       };
+    case UPDATE_JAM:
+      return {
+        ...state,
+        loading: true,
+      }
+    case UPDATE_JAM_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        currentJam: action.payload
+      }
 		default:
 			return state;
 	}

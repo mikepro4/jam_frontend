@@ -18,6 +18,9 @@ export const TOGGLE_AUDIO_SETTINGS = "app/TOGGLE_AUDIO_SETTINGS";
 export const TOGGLE_JAM_METADATA = "app/TOGGLE_JAM_METADATA";
 export const TOGGLE_VIZ_SETTINGS = "app/TOGGLE_VIZ_SETTINGS";
 
+export const UPDATE_JAM = "app/UPDATE_JAM";
+export const UPDATE_JAM_SUCCESS = "app/UPDATE_JAM_SUCCESS";
+
 // =============================================================================
 
 // Player

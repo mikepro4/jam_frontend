@@ -11,7 +11,9 @@ import {
   CLEAR_CURRENT_JAM,
   TOGGLE_AUDIO_SETTINGS,
   TOGGLE_JAM_METADATA,
-  TOGGLE_VIZ_SETTINGS
+  TOGGLE_VIZ_SETTINGS,
+  UPDATE_JAM,
+  UPDATE_JAM_SUCCESS
 } from "../actions/types";
 
 // =============================================================================
@@ -93,10 +95,22 @@ export const updateJam = (jamId, newJam, success) => async (
 	getState,
 	api
 ) => {
+  dispatch({
+    type: UPDATE_JAM
+  });
+
 	const response = await api.post("/jams/update", {
 		jamId,
 		newJam
 	});
+
+  if(response) {
+    dispatch({
+      type: UPDATE_JAM_SUCCESS,
+      payload: response.data.jam
+    });
+  }
+
 	if (success) {
 		success(response.data);
 	}

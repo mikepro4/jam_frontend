@@ -49,7 +49,8 @@ class Timeline extends Component {
 	        </div>
 
 	        <div className="timeline-right">
-	          timeline right
+	          timeline right: {this.props.currentJam.metadata.duration}
+						currentTime: {this.props.player.currentTime}
 	        </div>
 	      </div>
 			);

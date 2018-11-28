@@ -17,7 +17,9 @@ class AudioUploader extends Component {
 	};
 
 	handleDrop = files => {
-    this.props.uploadAudioFile(files[0])
+    this.props.uploadAudioFile(files[0], (sound) => {
+			this.props.onComplete(sound)
+		})
 	};
 
 	render() {
