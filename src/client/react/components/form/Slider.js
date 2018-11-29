@@ -23,7 +23,8 @@ class Slider extends Component {
 	render() {
 		return (
       <div className="slider-container">
-        <div onClick={() => this.props.meta.dispatch(change('viz_settings', 'boldRate', 20)) }>change bold rate</div>
+        <div onClick={() => this.props.meta.dispatch(change('viz_settings', this.props.input.name, 20)) }>change</div>
+        {this.props.label}
         <input {...this.props.input}   />
       </div>
 		);

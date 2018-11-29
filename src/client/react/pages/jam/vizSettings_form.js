@@ -22,6 +22,31 @@ class VizSettingsForm extends Component {
 							label="Bold rate"
 							ref="boldRate"
 						/>
+						<Field
+							name="step"
+							component={Slider}
+							label="step"
+							ref="step"
+						/>
+						<Field
+							name="rotateSpeed"
+							component={Slider}
+							label="rotateSpeed"
+							ref="rotateSpeed"
+						/>
+						<Field
+							name="frequency"
+							component={Slider}
+							label="frequency"
+							ref="frequency"
+						/>
+
+						<Field
+							name="friction"
+							component={Slider}
+							label="friction"
+							ref="friction"
+						/>
 		        <Button
 							className="submit-button"
 							loading={this.props.loading}

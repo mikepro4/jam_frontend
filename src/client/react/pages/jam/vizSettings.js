@@ -29,6 +29,7 @@ class VizSettings extends Component {
 					<VizSettingsForm
 						ref="VizSettingsForm"
 						enableReinitialize="true"
+						initialValues={this.props.currentJam.defaultViz.shape}
 						onSubmit={values => {
 							this.props.saveViz(values)
 						}}
