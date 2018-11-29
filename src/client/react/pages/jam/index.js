@@ -4,12 +4,18 @@ import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import posed, { PoseGroup } from 'react-pose';
 import SplitText from 'react-pose-text';
+import * as _ from "lodash";
 
 import {
 	loadJam,
   clearCurrentJam,
 	updateJam
 } from '../../../redux/actions/jamActions'
+
+
+import {
+	changeVizSettings
+} from '../../../redux/actions/vizActions'
 
 import Timeline from './timeline'
 import JamToolbar from './jamToolbar'
@@ -74,8 +80,42 @@ class JamPage extends Component {
 		this.props.updateJam(this.props.currentJam._id, newJam)
 	}
 
-	updateJamViz = (viz) => {
-		console.log(viz)
+	updateJamViz = (values) => {
+		//
+		// let newJamValues = _.merge({}, this.props.currentJam.defaultViz.shape, values)
+		//
+		// let newJam = {
+		// 	...this.props.currentJam,
+		// 	defaultViz: {
+		// 		shape: newJamValues,
+		// 		background: this.props.currentJam.defaultViz.background,
+		// 		point: this.props.currentJam.defaultViz.point,
+		// 	}
+		// }
+
+		// console.log(newJam)
+
+		// this.props.updateJam(this.props.currentJam._id, newJam)
+		this.props.changeVizSettings({
+			shape: {
+				...values
+			}
+		})
+	}
+
+	saveViz = (values) => {
+		let newJamValues = _.merge({}, this.props.currentJam.defaultViz.shape, values)
+
+		let newJam = {
+			...this.props.currentJam,
+			defaultViz: {
+				shape: newJamValues,
+				background: this.props.currentJam.defaultViz.background,
+				point: this.props.currentJam.defaultViz.point,
+			}
+		}
+
+		this.props.updateJam(this.props.currentJam._id, newJam)
 	}
 
 	render() {
@@ -90,7 +130,10 @@ class JamPage extends Component {
 						<div className="jam-sections-container">
 							<AudioSettings onAudioUpdate={(sound) => this.updateJamAudio(sound)}/>
 							<MetadataSettings onMetadataUpdate={(metadata) => this.updateJamMetadata(metadata)} />
-							<VizSettings onVizUpdate={(viz) => this.updateJamViz(viz)} />
+							<VizSettings
+								onVizUpdate={(viz) => this.updateJamViz(viz)}
+								saveViz={(viz) => this.saveViz(viz)}
+							/>
 						</div>
 
 						<JamToolbar />
@@ -111,6 +154,7 @@ export default {
 	component: connect(mapStateToProps, {
     loadJam,
     clearCurrentJam,
-		updateJam
+		updateJam,
+		changeVizSettings
   })(JamPage)
 }

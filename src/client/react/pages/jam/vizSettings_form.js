@@ -1,12 +1,13 @@
 import React, { Component } from "react";
-import { Field, reduxForm, formValueSelector } from "redux-form";
+import { Field, reduxForm, formValueSelector, change } from "redux-form";
 import classnames from "classnames";
 import { Form } from "redux-form";
-import { connect } from "react-redux";
+import { connect, actions } from "react-redux";
 import { Link } from "react-router-dom";
 import { Button } from "@blueprintjs/core";
 
 import Input from "../../components/form/Input";
+import Slider from "../../components/form/Slider";
 
 class VizSettingsForm extends Component {
 	render() {
@@ -15,6 +16,12 @@ class VizSettingsForm extends Component {
 		return (
 				<div className="viz-settings-form">
 					<Form onSubmit={handleSubmit} autoComplete="off">
+						<Field
+							name="boldRate"
+							component={Slider}
+							label="Bold rate"
+							ref="boldRate"
+						/>
 		        <Button
 							className="submit-button"
 							loading={this.props.loading}

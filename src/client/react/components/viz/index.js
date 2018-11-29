@@ -32,9 +32,8 @@ class Viz extends Component {
   };
 
 	componentDidMount = () => {
-		if(this.props.currentJam._id) {
+		if(this.props.currentJam._id && this.props.viz) {
 			this.loadSettings()
-
 			this.startViz()
 		}
 		window.addEventListener("resize", this.handleResize);
@@ -52,10 +51,13 @@ class Viz extends Component {
 	componentDidUpdate = (prevprops) => {
 		if(prevprops.currentJam._id !== this.props.currentJam._id) {
 			this.loadSettings()
+
 			this.startViz()
+
 		}
 		if(!_.isEqual(prevprops.viz.newVizSettings, this.props.viz.newVizSettings)) {
 			console.log("update settings here")
+			// window.cancelAnimationFrame(this.state.requestAnimationFrame);
 			this.updateViz()
 		}
 	}
@@ -65,6 +67,7 @@ class Viz extends Component {
   }
 
 	loadSettings = () => {
+		// window.cancelAnimationFrame(this.state.requestAnimationFrame);
 		this.props.loadSettings(this.props.currentJam.defaultViz, this.props.currentJam._id)
 	}
 
@@ -87,7 +90,7 @@ class Viz extends Component {
     })
 	}
 
-	updateViz = () => {
+	updateViz = (callback) => {
 
     let rect = this.refs.viz_container.getBoundingClientRect();
 
@@ -139,7 +142,9 @@ class Viz extends Component {
       pointCount: pointCount,
       pointOpacity: pointOpacity,
     }, () => {
-      this.paint()
+			if(!this.state.requestAnimationFrame) {
+				this.paint()
+			}
     })
   }
 
