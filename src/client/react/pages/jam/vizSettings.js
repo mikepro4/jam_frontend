@@ -4,6 +4,10 @@ import { withRouter, Link } from "react-router-dom";
 import classNames from "classnames"
 import posed, { PoseGroup } from 'react-pose';
 
+import {
+	changeVizSettings
+} from '../../../redux/actions/vizActions'
+
 import VizSettingsForm from './vizSettings_form'
 
 class VizSettings extends Component {
@@ -15,6 +19,13 @@ class VizSettings extends Component {
     if(this.props.jamScreen.vizSettingsVisible && this.props.currentJam.defaultViz) {
       return (
         <div className="jam-section jam-viz-settings">
+					<button onClick={() => this.props.changeVizSettings({
+							shape: {
+								boldRate: 10
+							}
+						},
+						this.props.currentJam._id
+				)}>change viz</button>
 					<VizSettingsForm
 						ref="VizSettingsForm"
 						enableReinitialize="true"
@@ -39,4 +50,5 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, {
+	changeVizSettings
 })(withRouter(VizSettings));

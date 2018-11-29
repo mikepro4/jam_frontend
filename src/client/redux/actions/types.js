@@ -42,3 +42,9 @@ export const UPLOAD_AUDIO_SUCCESS = "app/UPLOAD_AUDIO_SUCCESS";
 export const UPLOAD_AUDIO_ERROR = "app/UPLOAD_AUDIO_ERROR";
 
 // =============================================================================
+
+// Viz
+
+export const CHANGE_VIZ_SETTINGS = "app/CHANGE_VIZ_SETTINGS";
+export const RESET_VIZ = "app/REST_VIZ";
+export const LOAD_SETTINGS ="app/LOAD_SETTINGS"

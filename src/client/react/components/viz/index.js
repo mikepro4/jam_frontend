@@ -3,10 +3,14 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import classNames from "classnames"
 import posed, { PoseGroup } from 'react-pose';
+import * as _ from "lodash";
+
+import {
+	loadSettings
+} from '../../../redux/actions/vizActions'
 
 class Viz extends Component {
 	state = {
-    points: [],
     width: 0,
     height: 0,
 		radius: 0,
@@ -29,6 +33,8 @@ class Viz extends Component {
 
 	componentDidMount = () => {
 		if(this.props.currentJam._id) {
+			this.loadSettings()
+
 			this.startViz()
 		}
 		window.addEventListener("resize", this.handleResize);
@@ -45,13 +51,22 @@ class Viz extends Component {
 
 	componentDidUpdate = (prevprops) => {
 		if(prevprops.currentJam._id !== this.props.currentJam._id) {
+			this.loadSettings()
 			this.startViz()
+		}
+		if(!_.isEqual(prevprops.viz.newVizSettings, this.props.viz.newVizSettings)) {
+			console.log("update settings here")
+			this.updateViz()
 		}
 	}
 
 	startViz = () => {
 		this.updateDimensions(this.updateViz)
   }
+
+	loadSettings = () => {
+		this.props.loadSettings(this.props.currentJam.defaultViz, this.props.currentJam._id)
+	}
 
 	updateDimensions = (callback) => {
 		let rect = this.refs.viz_container.getBoundingClientRect();
@@ -76,6 +91,14 @@ class Viz extends Component {
 
     let rect = this.refs.viz_container.getBoundingClientRect();
 
+		let vizSource
+
+		if (this.props.viz.newVizSettings) {
+			vizSource = 'newVizSettings'
+		} else {
+			vizSource = 'vizSettings'
+		}
+
     const {
       rotateSpeed,
       friction,
@@ -84,14 +107,14 @@ class Viz extends Component {
       frequency,
       boldRate,
       math
-    } = this.props.currentJam.defaultViz.shape
+    } = this.props.viz[vizSource].shape
 
     const {
       pointSize,
       pointOpacity,
       pointCount,
       pointColor
-    } = this.props.currentJam.defaultViz.point
+    } = this.props.viz[vizSource].point
 
     const {
       colorEnabled,
@@ -102,7 +125,7 @@ class Viz extends Component {
       gradientScale,
       gradientRotateDegree,
       gradientType
-    } = this.props.currentJam.defaultViz.background
+    } = this.props.viz[vizSource].background
 
     this.setState({
       rotate_speed: rotateSpeed * 0.1 + 0.001,
@@ -279,8 +302,9 @@ function mapStateToProps(state) {
 		location: state.router.location,
     app: state.app,
     player: state.player,
-    currentJam: state.jams.currentJam
+    currentJam: state.jams.currentJam,
+		viz: state.viz
 	};
 }
 
-export default connect(mapStateToProps, {})(Viz);
+export default connect(mapStateToProps, { loadSettings })(Viz);
