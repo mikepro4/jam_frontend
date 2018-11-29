@@ -62,7 +62,16 @@ class JamPage extends Component {
 	}
 
 	updateJamMetadata = (metadata) => {
-		console.log(metadata)
+		let newJam = {
+			...this.props.currentJam,
+			metadata: {
+				...this.props.currentJam.metadata,
+				artistName: metadata.artistName,
+				trackName: metadata.trackName
+			}
+		}
+
+		this.props.updateJam(this.props.currentJam._id, newJam)
 	}
 
 	updateJamViz = (viz) => {

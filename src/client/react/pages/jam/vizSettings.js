@@ -4,12 +4,24 @@ import { withRouter, Link } from "react-router-dom";
 import classNames from "classnames"
 import posed, { PoseGroup } from 'react-pose';
 
+import VizSettingsForm from './vizSettings_form'
 
 class VizSettings extends Component {
+	handleSubmit = values => {
+		this.props.onVizUpdate(values)
+	}
+
 	render() {
-    if(this.props.jamScreen.vizSettingsVisible) {
+    if(this.props.jamScreen.vizSettingsVisible && this.props.currentJam.defaultViz) {
       return (
-        <div className="jam-section jam-viz-settings"> viz settings</div>
+        <div className="jam-section jam-viz-settings">
+					<VizSettingsForm
+						ref="VizSettingsForm"
+						enableReinitialize="true"
+						initialValues={this.props.currentJam.defaultViz}
+						onSubmit={this.handleSubmit.bind(this)}
+					/>
+				</div>
   		);
     } else {
       return ""

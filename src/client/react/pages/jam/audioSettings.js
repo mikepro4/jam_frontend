@@ -11,10 +11,7 @@ class AudioSettings extends Component {
     if(this.props.jamScreen.audioSettingsVisible) {
       return (
         <div className="jam-section jam-audio-settings">
-				audio settings
-
 					<AudioUploader onComplete={(sound) => this.props.onAudioUpdate(sound)}/>
-
 				</div>
   		);
     } else {

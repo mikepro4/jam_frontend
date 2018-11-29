@@ -23,6 +23,16 @@
 @import "../react/components/header/index";
 @import "../react/components/viz/index";
 
+// form components
+@import "../react/components/form/Checkbox";
+@import "../react/components/form/ColorPicker";
+@import "../react/components/form/DateInput";
+@import "../react/components/form/Dropdown";
+@import "../react/components/form/Input";
+@import "../react/components/form/Select";
+@import "../react/components/form/Slider";
+@import "../react/components/form/Textarea";
+
 html {
 	// overflow: hidden;
 	// overflow-y: scroll;
