@@ -30,7 +30,7 @@
       height: 30px;
       flex-grow: 1;
       flex-shrink: 1;
-      background: $black4;
+      background: $black2;
       margin: 0 2px 0 0;
       overflow: hidden;
       cursor: ew-resize;
@@ -54,7 +54,7 @@
       input {
         width: 70px;
         background: $black1;
-        border: 1px solid $black5;
+        border: 1px solid $black2;
         color: $white;
         padding: 0 5px;
         font-size: 12px;
@@ -74,14 +74,23 @@
        li {
          button {
            border: none;
-           background: $black5;
+           background: $black2;
            color: $white;
            height: 30px;
            margin: 0 0 0 2px;
            font-size: 10px;
+           color: rgba($white,0.5);
+           font-weight: 300;
+           transition: all 0.2s;
 
            &:hover {
              background: $blue1;
+             color: $white
+           }
+
+           &:active {
+             background: rgba($blue1, 0.5);
+             color: $white
            }
          }
        }

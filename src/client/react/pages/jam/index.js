@@ -109,11 +109,13 @@ class JamPage extends Component {
 		let newJam = {
 			...this.props.currentJam,
 			defaultViz: {
-				shape: newJamValues,
+				shape: this.props.viz.newVizSettings.shape,
 				background: this.props.currentJam.defaultViz.background,
 				point: this.props.currentJam.defaultViz.point,
 			}
 		}
+
+		console.log(this.props.viz)
 
 		this.props.updateJam(this.props.currentJam._id, newJam)
 	}
@@ -146,7 +148,8 @@ class JamPage extends Component {
 
 function mapStateToProps(state) {
 	return {
-    currentJam: state.jams.currentJam
+    currentJam: state.jams.currentJam,
+		viz: state.viz
 	};
 }
 

@@ -12,6 +12,7 @@ import VizSettingsForm from './vizSettings_form'
 
 class VizSettings extends Component {
 	handleSubmit = values => {
+		console.log(values)
 		this.props.onVizUpdate(values)
 	}
 
@@ -24,11 +25,12 @@ class VizSettings extends Component {
 						enableReinitialize="true"
 						initialValues={this.props.currentJam.defaultViz.shape}
 						onSubmit={values => {
+							this.handleSubmit(values)
 							this.props.saveViz(values)
 						}}
 						onChange={values => {
 							this.handleSubmit(values)
-					}}
+						}}
 					/>
 				</div>
   		);

@@ -6,8 +6,8 @@ import { change } from "redux-form";
 class Slider extends Component {
   state = {
     inputFocused: false,
-    min: 0,
-    max: 0,
+    sliderMin: 0,
+    sliderMax: 0,
     currentValue: 0,
     clickActive: false
   };
@@ -26,23 +26,22 @@ class Slider extends Component {
 
   componentDidMount = () => {
     this.setState({
-      min: this.props.min,
-      max: this.props.max,
-      currentValue: this.props.input.value
+      sliderMax: this.props.sliderMax,
+      currentValue: Number(this.props.input.value)
     })
   }
 
   componentDidUpdate = (prevprops) => {
     if(prevprops.input.value !== this.props.input.value) {
       this.setState({
-        currentValue: this.props.input.value
+        currentValue: Number(this.props.input.value)
       })
     }
   }
 
   getBarWidth = (e) => {
     let value = Number(this.state.currentValue)
-    let width = value * 100 / this.state.max
+    let width = value * 100 / this.state.sliderMax
     return `${width}%`
   }
 
@@ -50,13 +49,13 @@ class Slider extends Component {
     const relX = event.pageX - (this.refs.slider.offsetLeft)
     const progressBarPercent = relX * 100 / this.refs.slider.getBoundingClientRect().width
 
-    let newValue = this.state.max *progressBarPercent / 100
+    let newValue = this.state.sliderMax *progressBarPercent / 100
 
     this.changeValue(newValue)
   }
 
   changeValue = (value) => {
-    this.props.meta.dispatch(change(this.props.meta.form, this.props.input.name, value))
+    this.props.meta.dispatch(change(this.props.meta.form, this.props.input.name, Number(value)))
   }
 
   onMouseMove = (value) => {
@@ -84,15 +83,15 @@ class Slider extends Component {
   }
 
   setMin = () => {
-    this.changeValue(this.state.min)
+    this.changeValue(this.state.sliderMin)
   }
 
   setMax = () => {
-    this.changeValue(this.state.max)
+    this.changeValue(this.state.sliderMax)
   }
 
   add = () => {
-    if(this.props.input.value < this.state.max ) {
+    if(this.props.input.value < this.state.sliderMax ) {
       this.changeValue(Number(this.props.input.value) + 0.01)
     }
   }
@@ -104,11 +103,11 @@ class Slider extends Component {
   }
 
   setMid = () => {
-    this.changeValue(Number(this.state.max)/2)
+    this.changeValue(Number(this.state.sliderMax)/2)
   }
 
   setPercent = (percent) => {
-    let value = percent * this.state.max / 100
+    let value = percent * this.state.sliderMax / 100
     this.changeValue(value)
   }
 
