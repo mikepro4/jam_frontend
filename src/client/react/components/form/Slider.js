@@ -142,36 +142,36 @@ class Slider extends Component {
           <div className="action-container">
             <ul className="action-list">
               <li className="action-item">
-                <button className="input-action-button" onClick={() => this.setMin()}>Min</button>
+                <a className="input-action-button" onClick={() => this.setMin()}>Min</a>
               </li>
 
               <li className="action-item">
-                <button className="input-action-button" onClick={() => this.setPercent(10)}>10%</button>
+                <a className="input-action-button" onClick={() => this.setPercent(10)}>10%</a>
               </li>
 
               <li className="action-item">
-                <button className="input-action-button" onClick={() => this.setPercent(25)}>25%</button>
+                <a className="input-action-button" onClick={() => this.setPercent(25)}>25%</a>
               </li>
 
               <li className="action-item">
-                <button className="input-action-button" onClick={() => this.setPercent(50)}>50%</button>
+                <a className="input-action-button" onClick={() => this.setPercent(50)}>50%</a>
               </li>
 
               <li className="action-item">
-                <button className="input-action-button" onClick={() => this.setPercent(75)}>75%</button>
+                <a className="input-action-button" onClick={() => this.setPercent(75)}>75%</a>
               </li>
 
 
               <li className="action-item">
-                <button className="input-action-button" onClick={() => this.setMax()}>Max</button>
+                <a className="input-action-button" onClick={() => this.setMax()}>Max</a>
               </li>
 
               <li className="action-item">
-                <button className="input-action-button" onClick={() => this.add()}>+</button>
+                <a className="input-action-button" onClick={() => this.add()}>+</a>
               </li>
 
               <li className="action-item">
-                <button className="input-action-button" onClick={() => this.subtract()}>-</button>
+                <a className="input-action-button" onClick={() => this.subtract()}>-</a>
               </li>
             </ul>
           </div>

@@ -220,7 +220,7 @@ class Viz extends Component {
 
 			if (this.state.math == "sin") {
 				t_radius =
-	        Math.sin(this.state.rotate * soundModifier + this.state.freq * i) * this.state.radius * this.state.bold_rate +
+	        Math.sin(this.state.rotate * soundModifier + (this.state.freq) * i) * this.state.radius * this.state.bold_rate +
 	        this.state.radius;
 			} else if (this.state.math == "cos") {
 				t_radius =

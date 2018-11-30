@@ -9,14 +9,6 @@ import { Button } from "@blueprintjs/core";
 import Input from "../../components/form/Input";
 import Slider from "../../components/form/Slider";
 
-const normalizeNum= (value, previousValue) => {
-  if (!value) {
-    return value
-  }
-  const onlyNums = value.replace(/[^\d]/g, '')
-	return onlyNums
-}
-
 class VizSettingsForm extends Component {
 	render() {
 		const { handleSubmit } = this.props;
@@ -29,28 +21,24 @@ class VizSettingsForm extends Component {
 							name="boldRate"
 							component={Slider}
 							label="Bold rate"
-							normalize={normalizeNum}
 							sliderMax={20}
 						/>
 						<Field
 							name="step"
 							component={Slider}
 							label="step"
-							normalize={normalizeNum}
 							sliderMax={20}
 						/>
 						<Field
 							name="rotateSpeed"
 							component={Slider}
 							label="rotateSpeed"
-							normalize={normalizeNum}
 							sliderMax={20}
 						/>
 						<Field
 							name="frequency"
 							component={Slider}
 							label="frequency"
-							normalize={normalizeNum}
 							sliderMax={20}
 						/>
 
@@ -58,7 +46,6 @@ class VizSettingsForm extends Component {
 							name="friction"
 							component={Slider}
 							label="friction"
-							normalize={normalizeNum}
 							sliderMax={1}
 						/>
 
@@ -66,7 +53,6 @@ class VizSettingsForm extends Component {
 							name="rotatePointSpeed"
 							component={Slider}
 							label="rotatePointSpeed"
-							normalize={normalizeNum}
 							sliderMax={10}
 						/>
 		        <Button
