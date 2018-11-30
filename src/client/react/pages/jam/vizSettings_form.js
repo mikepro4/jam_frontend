@@ -21,24 +21,32 @@ class VizSettingsForm extends Component {
 							component={Slider}
 							label="Bold rate"
 							ref="boldRate"
+							min={0}
+							max={20}
 						/>
 						<Field
 							name="step"
 							component={Slider}
 							label="step"
 							ref="step"
+							min={0}
+							max={20}
 						/>
 						<Field
 							name="rotateSpeed"
 							component={Slider}
 							label="rotateSpeed"
 							ref="rotateSpeed"
+							min={0}
+							max={20}
 						/>
 						<Field
 							name="frequency"
 							component={Slider}
 							label="frequency"
 							ref="frequency"
+							min={0}
+							max={20}
 						/>
 
 						<Field
@@ -46,6 +54,8 @@ class VizSettingsForm extends Component {
 							component={Slider}
 							label="friction"
 							ref="friction"
+							min={0}
+							max={1}
 						/>
 		        <Button
 							className="submit-button"

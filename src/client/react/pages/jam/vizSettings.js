@@ -19,13 +19,6 @@ class VizSettings extends Component {
     if(this.props.jamScreen.vizSettingsVisible && this.props.currentJam.defaultViz) {
       return (
         <div className="jam-section jam-viz-settings">
-					<button onClick={() => this.props.changeVizSettings({
-							shape: {
-								boldRate: 10
-							}
-						},
-						this.props.currentJam._id
-				)}>change viz</button>
 					<VizSettingsForm
 						ref="VizSettingsForm"
 						enableReinitialize="true"

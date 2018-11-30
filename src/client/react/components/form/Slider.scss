@@ -1,0 +1,59 @@
+.input-container {
+  display: flex;
+  width: 300px;
+  margin: 0 0 2px 0;
+
+  .input-label {
+    display: flex;
+    width: 100px;
+    flex-grow: 0;
+    flex-shrink: 0;
+    align-items: center;
+  }
+
+  &.slider-container {
+
+  }
+
+  .control-container {
+    display: flex;
+    flex-grow: 1;
+    flex-shrink: 1;
+
+    .control-slider-container {
+      display: flex;
+      position: relative;
+      height: 30px;
+      flex-grow: 1;
+      flex-shrink: 1;
+      background: $black4;
+      margin: 0 2px 0 0;
+      overflow: hidden;
+
+      .control-slider-bar {
+        position: absolute;
+        background: $blue1;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 20%;
+      }
+    }
+
+    .control-input {
+      width: 70px;
+      flex-grow: 0;
+      flex-shrink: 0;
+      display: flex;
+
+      input {
+        width: 70px;
+        background: $black1;
+        border: 1px solid $black5;
+        color: $white;
+        padding: 0 5px;
+        font-size: 12px;
+      }
+    }
+  }
+}
