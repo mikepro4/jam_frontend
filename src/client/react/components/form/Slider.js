@@ -8,7 +8,8 @@ class Slider extends Component {
     inputFocused: false,
     min: 0,
     max: 0,
-    currentValue: 0
+    currentValue: 0,
+    clickActive: false
   };
 
   onBlur = () => {
@@ -58,6 +59,59 @@ class Slider extends Component {
     this.props.meta.dispatch(change(this.props.meta.form, this.props.input.name, value))
   }
 
+  onMouseMove = (value) => {
+    if(this.state.clickActive) {
+      this.calculateWidth(value)
+    }
+  }
+
+  onMouseLeave = (value) => {
+    this.setState({
+      clickActive: false
+    })
+  }
+
+  onMouseDown = (value) => {
+    this.setState({
+      clickActive: true
+    })
+  }
+
+  onMouseUp = (value) => {
+    this.setState({
+      clickActive: false
+    })
+  }
+
+  setMin = () => {
+    this.changeValue(this.state.min)
+  }
+
+  setMax = () => {
+    this.changeValue(this.state.max)
+  }
+
+  add = () => {
+    if(this.props.input.value < this.state.max ) {
+      this.changeValue(Number(this.props.input.value) + 0.01)
+    }
+  }
+
+  subtract = () => {
+    if(this.props.input.value >= 0.01 ) {
+      this.changeValue(Number(this.props.input.value) - 0.01)
+    }
+  }
+
+  setMid = () => {
+    this.changeValue(Number(this.state.max)/2)
+  }
+
+  setPercent = (percent) => {
+    let value = percent * this.state.max / 100
+    this.changeValue(value)
+  }
+
 	render() {
 		return (
       <div className="input-container slider-container">
@@ -65,15 +119,62 @@ class Slider extends Component {
           {this.props.label}
         </div>
 
-        <div className="control-container">
-          <div className="control-slider-container" ref="slider" onClick={(e) => this.calculateWidth(e)}>
-            <div className="control-slider-bar" style={{
-              width: this.getBarWidth()
-            }}/>
+        <div className="input-right">
+          <div className="control-container">
+            <div
+              className="control-slider-container"
+              ref="slider"
+              onClick={(e) => this.calculateWidth(e)}
+              onMouseLeave={this.onMouseLeave.bind(this)}
+              onMouseMove={this.onMouseMove.bind(this)}
+              onMouseDown={this.onMouseDown.bind(this)}
+              onMouseUp={this.onMouseUp.bind(this)}
+            >
+              <div className="control-slider-bar" style={{
+                width: this.getBarWidth()
+              }}/>
+            </div>
+
+            <div className="control-input">
+              <input {...this.props.input}   />
+            </div>
           </div>
 
-          <div className="control-input">
-            <input {...this.props.input}   />
+          <div className="action-container">
+            <ul className="action-list">
+              <li className="action-item">
+                <button className="input-action-button" onClick={() => this.setMin()}>Min</button>
+              </li>
+
+              <li className="action-item">
+                <button className="input-action-button" onClick={() => this.setPercent(10)}>10%</button>
+              </li>
+
+              <li className="action-item">
+                <button className="input-action-button" onClick={() => this.setPercent(25)}>25%</button>
+              </li>
+
+              <li className="action-item">
+                <button className="input-action-button" onClick={() => this.setPercent(50)}>50%</button>
+              </li>
+
+              <li className="action-item">
+                <button className="input-action-button" onClick={() => this.setPercent(75)}>75%</button>
+              </li>
+
+
+              <li className="action-item">
+                <button className="input-action-button" onClick={() => this.setMax()}>Max</button>
+              </li>
+
+              <li className="action-item">
+                <button className="input-action-button" onClick={() => this.add()}>+</button>
+              </li>
+
+              <li className="action-item">
+                <button className="input-action-button" onClick={() => this.subtract()}>-</button>
+              </li>
+            </ul>
           </div>
         </div>
       </div>

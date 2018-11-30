@@ -1,6 +1,6 @@
 .input-container {
   display: flex;
-  width: 300px;
+  width: 400px;
   margin: 0 0 2px 0;
 
   .input-label {
@@ -11,14 +11,18 @@
     align-items: center;
   }
 
-  &.slider-container {
 
+  .input-right {
+    display: flex;
+    flex-grow: 1;
+    flex-shrink: 1;
   }
 
   .control-container {
     display: flex;
     flex-grow: 1;
     flex-shrink: 1;
+    height: 30px;
 
     .control-slider-container {
       display: flex;
@@ -29,6 +33,7 @@
       background: $black4;
       margin: 0 2px 0 0;
       overflow: hidden;
+      cursor: ew-resize;
 
       .control-slider-bar {
         position: absolute;
@@ -55,5 +60,31 @@
         font-size: 12px;
       }
     }
+  }
+
+  .action-container {
+    display: flex;
+    flex-grow: 0;
+    flex-shrink: 0;
+    width: 100px;
+
+     ul {
+       display: flex;
+
+       li {
+         button {
+           border: none;
+           background: $black5;
+           color: $white;
+           height: 30px;
+           margin: 0 0 0 2px;
+           font-size: 10px;
+
+           &:hover {
+             background: $blue1;
+           }
+         }
+       }
+     }
   }
 }
