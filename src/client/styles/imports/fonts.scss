@@ -21,3 +21,44 @@
     font-weight: 600;
     font-style: normal;
 }
+
+@font-face {
+    font-family: 'BlenderBook';
+    src: url('../../../static/fonts/BlenderPro-Book.woff2') format('woff2'),
+        url('../../../static/fonts/BlenderPro-Book.woff') format('font-woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'BlenderBold';
+    src: url('../../../static/fonts/BlenderPro-Bold.woff2') format('woff2'),
+        url('../../../static/fonts/BlenderPro-Bold.woff') format('font-woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'BlenderHeavy';
+    src: url('../../../static/fonts/BlenderPro-Heavy.woff2') format('woff2'),
+        url('../../../static/fonts/BlenderPro-Heavy.woff') format('font-woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'BlenderMedium';
+    src: url('../../../static/fonts/BlenderPro-Medium.woff2') format('woff2'),
+        url('../../../static/fonts/BlenderPro-Heavy.woff') format('font-woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'BlenderThin';
+    src: url('../../../static/fonts/BlenderPro-Thin.woff2') format('woff2'),
+        url('../../../static/fonts/BlenderPro-Thin.woff') format('font-woff');
+    font-weight: 400;
+    font-style: normal;
+}
+

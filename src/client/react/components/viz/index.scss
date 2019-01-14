@@ -4,6 +4,11 @@
   right: 0;
   left: 0;
   bottom: 114px;
+  transition: all 0.2s;
+
+  &.full {
+    bottom: 0;
+  }
 
   .viz {
     position: absolute;

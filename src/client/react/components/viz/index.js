@@ -21,14 +21,11 @@ class Viz extends Component {
     step: 0,
     freq: 0,
     bold_rate: 0,
-		math: "",
+		math: "sin",
 		pointSize: 0,
 		pointOpacity: 0,
     x: 0,
-    y: 0,
-		rectWidth: 0,
-		rectHeight: 0,
-		rectRadius: 0
+    y: 0
   };
 
 	componentDidMount = () => {
@@ -51,15 +48,17 @@ class Viz extends Component {
 	componentDidUpdate = (prevprops) => {
 		if(prevprops.currentJam._id !== this.props.currentJam._id) {
 			this.loadSettings()
-
 			this.startViz()
-
 		}
 		if(!_.isEqual(prevprops.viz.newVizSettings, this.props.viz.newVizSettings)) {
-			console.log("update settings here")
-			// window.cancelAnimationFrame(this.state.requestAnimationFrame);
 			this.updateViz()
-		}
+    }
+    
+    if(this.props.app.fullScreen !== prevprops.app.fullScreen) {
+      setTimeout(() => {
+        this.handleResize()
+      }, 10)
+    }
 	}
 
 	startViz = () => {
@@ -67,7 +66,6 @@ class Viz extends Component {
   }
 
 	loadSettings = () => {
-		// window.cancelAnimationFrame(this.state.requestAnimationFrame);
 		this.props.loadSettings(this.props.currentJam.defaultViz, this.props.currentJam._id)
 	}
 
@@ -75,14 +73,11 @@ class Viz extends Component {
 		let rect = this.refs.viz_container.getBoundingClientRect();
 
 		this.setState({
-      width: rect.width * 2,
-      height: rect.height * 2,
-      radius: (rect.width * 2) / 6,
-      rectWidth: rect.width * 2,
-      rectHeight: rect.height * 2,
-      rectRadius: (rect.width * 2) / 5,
-			x: (rect.width * 2) / 2,
-			y: (rect.height * 2) / 2
+      width: rect.width * 4,
+      height: rect.height * 4,
+      radius: (rect.width * 4) / 12,
+			x: (rect.width * 4) / 2,
+			y: (rect.height * 4) / 2
     }, () => {
 			if(callback) {
 				callback()
@@ -91,7 +86,6 @@ class Viz extends Component {
 	}
 
 	updateViz = (callback) => {
-
     let rect = this.refs.viz_container.getBoundingClientRect();
 
 		let vizSource
@@ -120,9 +114,9 @@ class Viz extends Component {
     } = this.props.viz[vizSource].point
 
     const {
-      colorEnabled,
-      colorValue,
-      colorOpacity,
+      backgroundEnabled,
+      backgroundColor,
+      backgroundOpacity,
       gradientEnabled,
       gradientColorStops,
       gradientScale,
@@ -141,6 +135,10 @@ class Viz extends Component {
       pointSize: pointSize,
       pointCount: pointCount,
       pointOpacity: pointOpacity,
+			pointColor: pointColor,
+			backgroundColor: backgroundColor,
+			backgroundEnabled: backgroundEnabled,
+			backgroundOpacity: backgroundOpacity
     }, () => {
 			if(!this.state.requestAnimationFrame) {
 				this.paint()
@@ -151,7 +149,6 @@ class Viz extends Component {
 	paint = () => {
     let canvas = this.refs.canvas;
     let ctx = canvas.getContext('2d')
-    ctx.fillStyle = "rgba(0, 0, 0, 0)";
     ctx.width = this.state.width;
     ctx.height = this.state.height;
     this.update();
@@ -159,8 +156,7 @@ class Viz extends Component {
 
 	generatePoints = () => {
     let points = []
-    const pointsAmount = 2048
-    for (var i = 0; i < pointsAmount; i++) {
+    for (var i = 0; i < this.state.pointCount; i++) {
       var pt = this.createPoint(
         Math.random(1) * this.state.width,
         Math.random(1) * this.state.height
@@ -189,11 +185,12 @@ class Viz extends Component {
 	renderOnce = (ctx, points) => {
 		ctx.clearRect(0, 0, this.state.width, this.state.height);
 
-    this.setState({
-      rotate: this.state.rotate + this.state.rotate_speed
-    })
+    // this.setState({
+    //   rotate: this.state.rotate + this.state.rotate_speed
+    // })
 
     let freqData = []
+		let soundModifier = 1
 
     if(this.props.player.analyser) {
       freqData = new Uint8Array(this.props.player.analyser.frequencyBinCount)
@@ -201,44 +198,17 @@ class Viz extends Component {
     }
 
     for (let i = 0; i < points.length; i++) {
-
-			let soundModifier
-
-      if(this.props.player.analyser) {
+      if(this.props.player.analyser && soundModifier) {
         soundModifier = freqData[this.getPointIterator(i)]/2
 
         if(soundModifier == 0) {
           soundModifier = 1
         }
-      } else {
-        soundModifier = 1
       }
 
       let point = points[i];
 
-			let t_radius
-
-			if (this.state.math == "sin") {
-				t_radius =
-	        Math.sin(this.state.rotate * soundModifier + (this.state.freq) * i) * this.state.radius * this.state.bold_rate +
-	        this.state.radius;
-			} else if (this.state.math == "cos") {
-				t_radius =
-	        Math.cos(this.state.rotate * soundModifier + this.state.freq * i) * this.state.radius * this.state.bold_rate +
-	        this.state.radius;
-			} else if (this.state.math == "tan") {
-				t_radius =
-	        Math.tan(this.state.rotate * soundModifier + this.state.freq * i) * this.state.radius * this.state.bold_rate +
-	        this.state.radius;
-			} else if (this.state.math == "atan") {
-				t_radius =
-	        Math.atan(this.state.rotate * soundModifier + this.state.freq * i) * this.state.radius * this.state.bold_rate +
-	        this.state.radius;
-			} else if (this.state.math == "log") {
-				t_radius =
-	        Math.log(this.state.rotate * soundModifier + this.state.freq * i) * this.state.radius * this.state.bold_rate +
-	        this.state.radius;
-			}
+			let t_radius = this.calculateRadius(soundModifier, i)
 
       let tx = this.state.x + Math.cos(this.state.rotate + this.state.step * i) * t_radius;
       let ty = this.state.y + Math.sin(this.state.rotate + this.state.step * i) * t_radius;
@@ -249,20 +219,38 @@ class Viz extends Component {
       point.x += point.vx;
       point.y += point.vy;
 
-      point.vx *= this.state.friction ;
-      point.vy *= this.state.friction ;
-
+      point.vx *= this.state.friction;
+      point.vy *= this.state.friction;
 
       if (point.x >= 0 && point.x <= this.state.width && point.y >= 0 && point.y <= this.state.height) {
-        // ctx.fillRect(point.x, point.y, this.state.pointSize, this.state.pointSize);
 				ctx.beginPath();
-
 				ctx.arc(point.x,point.y,this.state.pointSize,0,2*Math.PI);
-				ctx.fillStyle = `rgba(255,255,255,${this.getPointOpacity(freqData[this.getPointIterator(i)])}`;
+				ctx.fillStyle = `rgba(
+					${this.hexToRgb(this.state.pointColor).r},
+					${this.hexToRgb(this.state.pointColor).g},
+					${this.hexToRgb(this.state.pointColor).b},
+					${this.getPointOpacity(freqData[this.getPointIterator(i)])}
+				)`;
 				ctx.fill();
       }
     }
   }
+
+	hexToRgb = (hex) => {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+    } : null;
+	}
+
+	calculateRadius = (soundModifier, i) => {
+		let radius = Math[this.state.math](this.state.rotate * soundModifier + this.state.freq * i) * this.state.radius * this.state.bold_rate +
+				this.state.radius;
+
+		return radius
+	}
 
 	getPointIterator = (i) => {
 		if (i <= 1024) {
@@ -276,24 +264,30 @@ class Viz extends Component {
 		if(value > 0) {
 			return value/256*10
 		} else {
-			return 0.5
+			return this.state.pointOpacity
 		}
 	}
 
 	renderFrame = (ctx, points) => {
-    this.renderOnce(ctx, points)
-
+    this.renderOnce(ctx, points);
 		this.setState({
 			requestAnimationFrame: requestAnimationFrame(() => this.renderFrame(ctx, points))
-		})
+		});
   }
 
 	render() {
 		return (
-      <div className="viz-container" ref="viz_container">
+      <div 
+          className={classNames({"full": this.props.app.fullScreen}, "viz-container")}
+          ref="viz_container" 
+          style={{
+            backgroundColor: this.state.backgroundColor
+          }}
+			>
         <canvas
           ref="canvas"
           className="viz"
+          id="viz"
           width={this.state.width}
           height={this.state.height}
         />

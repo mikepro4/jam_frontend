@@ -1,3 +1,9 @@
 .app-content {
   padding-top: $headerHeight;
 }
+
+.of {
+  display: inline-block;
+  overflow: hidden;
+  position: relative;
+}

@@ -17,7 +17,8 @@ import Player from "./react/components/player"
 
 
 import {
-	fetchCurrentUser
+	fetchCurrentUser,
+	toggleFullScreenVisualization
 } from "./redux/actions/appActions";
 
 class App extends Component {
@@ -32,13 +33,19 @@ class App extends Component {
 		this.props.fetchCurrentUser();
 	}
 
+	@keydown("f")
+	toggleFullScreenVisualization() {
+		console.log("fullscreen");
+		this.props.toggleFullScreenVisualization()
+	}
+
 	render() {
 		return (
 			<div className="app">
 
 				<div className="app-container">
 
-					<Header/ >
+					{!this.props.fullScreen && <Header/ >}
 
 					<Player/>
 
@@ -56,12 +63,14 @@ class App extends Component {
 function mapStateToProps(state) {
 	return {
 		location: state.router.location,
-		auth: state.app.user
+		auth: state.app.user,
+		fullScreen: state.app.fullScreen
 	};
 }
 
 export default {
 	component: connect(mapStateToProps, {
-		fetchCurrentUser
+		fetchCurrentUser,
+		toggleFullScreenVisualization
 	})(withRouter(App))
 };

@@ -7,6 +7,11 @@
     bottom: 0;
     right: 0;
     z-index: 1;
+    background: #000000;
+
+    &.full {
+      top: 0
+    }
   }
 
   .jam-visualization {
@@ -25,6 +30,10 @@
     right: 0;
     z-index: 3;
     background: rgba($black1, 0.9);
+
+    &.full {
+      display: none;
+    }
   }
 
   .jam-sections-container {
@@ -32,6 +41,150 @@
       min-height: 100px;
       padding: 0 10px 0 10px;
       border-bottom: 1px solid rgba($white, 0.05)
+    }
+  }
+
+  .jam-intro {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 3;
+    cursor: url('../../../static/cursor.png'), auto;	
+
+    .screen {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 60px 50px;
+
+      .text_line {
+        font-family: "BlenderBold", sans-serif;
+        font-size: 200px;
+        line-height: 122px;
+        letter-spacing: 4px;
+        margin-bottom: 70px;
+        display: block;
+
+        &.small_text_line {
+          font-size: 20px;
+          line-height: inherit;
+          font-family: "BlenderBook", sans-serif;
+          letter-spacing: 2px;
+        }
+
+        &.medium_text_line {
+          font-size: 100px;
+          line-height: 60px;
+        }
+
+        .word {
+          opacity: 0;
+        }
+      }
+
+      .dcdnt_container {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .dcdnt {
+        font-family: "BlenderBold", sans-serif;
+        font-size: 60px;
+        opacity: 0;
+        position: relative;
+        left: 13px;
+        top: 2px;
+      }
+
+      &.screen_1 {
+        z-index: 1;
+      }
+    }
+
+    .screen_4_bottom {
+      position: absolute;
+      bottom: 50px;
+      left: 50px;
+      right: 50px;
+      display: flex;
+      justify-content: space-between;
+
+      .screen_4_bottom_line_container {
+        flex: 1 1 ;
+        margin-right: 15px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .screen_4_bottom_line {
+        background: white;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+      }
+
+      .screen_4_bottom_dcdnt {
+        background: #000000;
+        flex: 0 0;
+        font-family: "BlenderBook", sans-serif;
+        font-size: 20px;
+        line-height: 14px;
+        letter-spacing: 2px;
+        white-space: nowrap
+      }
+    }
+
+    .video-footer {
+      position: absolute;
+      left: 50px;
+      bottom: 50px;
+      right: 50px;
+      display: flex;
+      justify-content: space-between;
+      font-family: "BlenderBook", sans-serif;
+      font-size: 14px;
+      letter-spacing: 0.9px;
+
+      .line-container {
+        flex: 1 1;
+        height: 10px;
+        margin: 3px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+
+        .line {
+          height: 1px;
+          background: rgba($white, 0.2);
+          position: absolute;
+          left: 0;
+          width: 100%;
+          opacity: 0;
+        }
+      }
+
+      .of {
+        flex: 0 0 ;
+        white-space: nowrap
+      }
+
+      .label {
+        opacity: 0;
+      }
     }
   }
 }

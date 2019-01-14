@@ -2,6 +2,8 @@
 
 export const FETCH_AUTH = "app/FETCH_AUTH";
 
+export const TOGGLE_FULLSCREN = "app/TOGGLE_FULLSCREN";
+
 // =============================================================================
 
 // Jam

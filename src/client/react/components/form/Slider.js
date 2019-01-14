@@ -48,9 +48,7 @@ class Slider extends Component {
   calculateWidth(event) {
     const relX = event.pageX - (this.refs.slider.offsetLeft)
     const progressBarPercent = relX * 100 / this.refs.slider.getBoundingClientRect().width
-
     let newValue = this.state.sliderMax *progressBarPercent / 100
-
     this.changeValue(newValue)
   }
 

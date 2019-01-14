@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import classNames from "classnames";
 import { change } from "redux-form";
-import { SketchPicker } from 'react-color';
 
-class ColorPicker extends Component {
+class TabGroup extends Component {
   state = {
     inputFocused: false,
     currentValue: null,
+    tabOptions: []
   };
 
   onBlur = () => {
@@ -24,7 +24,8 @@ class ColorPicker extends Component {
 
   componentDidMount = () => {
     this.setState({
-      currentValue: this.props.input.value
+      currentValue: this.props.input.value,
+      tabOptions: this.props.tabOptions
     })
   }
 
@@ -37,12 +38,12 @@ class ColorPicker extends Component {
   }
 
   changeValue = (value) => {
-    this.props.meta.dispatch(change(this.props.meta.form, this.props.input.name, value.hex))
+    this.props.meta.dispatch(change(this.props.meta.form, this.props.input.name, value))
   }
 
 	render() {
 		return (
-      <div className="input-container color-picker-container">
+      <div className="input-container tabgroup-container">
         <div className="input-label">
           {this.props.label}
         </div>
@@ -50,14 +51,24 @@ class ColorPicker extends Component {
         <div className="input-right">
           <div className="control-container">
             <div
-              className="control-color-picker-container"
-              ref="colorPicker"
+              className="control-tab-container"
+              ref="tab"
             >
-              {this.state.currentValue && <SketchPicker
-                color={ this.state.currentValue }
-                onChangeComplete={ (value) =>  this.changeValue(value) }
-              />}
-
+              <ul className="tab-options">
+                {this.state.tabOptions.map((tabOption) => {
+                  return (
+                    <li
+                      className={classNames({
+                        "tab-option-active": this.state.currentValue == tabOption.value
+                      }, "tab-option")}
+                      onClick={() => this.changeValue(tabOption.value)}
+                      key={tabOption.value}
+                    >
+                      {tabOption.name}
+                    </li>
+                  )
+                })}
+              </ul>
             </div>
 
             <div className="control-input">
@@ -76,4 +87,4 @@ function mapStateToProps(state) {
 	};
 }
 
-export default connect(mapStateToProps, {})(ColorPicker);
+export default connect(mapStateToProps, {})(TabGroup);

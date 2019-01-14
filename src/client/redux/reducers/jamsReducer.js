@@ -21,7 +21,7 @@ export const initialState = {
   jamScreen: {
     audioSettingsVisible: false,
     jamMetadataVisible: false,
-    vizSettingsVisible: true
+    vizSettingsVisible: false
   }
 };
 

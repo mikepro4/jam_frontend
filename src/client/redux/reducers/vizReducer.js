@@ -25,10 +25,12 @@ export const vizReducer = (state = initialState, action) => {
     }
 		case CHANGE_VIZ_SETTINGS: {
 			let shape = _.merge({}, state.vizSettings.shape, action.vizSettings.shape)
+			let point = _.merge({}, state.vizSettings.point, action.vizSettings.point)
+			let background = _.merge({}, state.vizSettings.background, action.vizSettings.background)
 			let newVizSettings = {
 				shape: shape,
-				background: state.vizSettings.background,
-				point: state.vizSettings.point
+				background: background,
+				point: point
 			}
       return {
         ...state,

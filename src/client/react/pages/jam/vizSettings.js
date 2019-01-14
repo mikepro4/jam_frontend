@@ -16,14 +16,22 @@ class VizSettings extends Component {
 		this.props.onVizUpdate(values)
 	}
 
+	savePng = () => {
+		let c=document.getElementById("viz");
+		let d=c.toDataURL("image/png");
+		let w=window.open('about:blank','image from canvas');
+		w.document.write("<img src='"+d+"' alt='from canvas'/>");
+	}
+
 	render() {
     if(this.props.jamScreen.vizSettingsVisible && this.props.currentJam.defaultViz) {
       return (
         <div className="jam-section jam-viz-settings">
+				<button onClick={this.savePng}>Save png</button>
 					<VizSettingsForm
 						ref="VizSettingsForm"
 						enableReinitialize="true"
-						initialValues={this.props.currentJam.defaultViz.shape}
+						initialValues={this.props.currentJam.defaultViz}
 						onSubmit={values => {
 							this.handleSubmit(values)
 							this.props.saveViz(values)
