@@ -65,6 +65,24 @@ export default (
 				<link rel="stylesheet" href="/${buildAssets.bundle.css}">
 				<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 				<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+				<script type="text/javascript" src="/MochiKit/Base.js"></script>
+				<script type="text/javascript" src="/MochiKit/Iter.js"></script>
+				<script type="text/javascript" src="/MochiKit/Logging.js"></script>
+				<script type="text/javascript" src="/MochiKit/DateTime.js"></script>
+				<script type="text/javascript" src="/MochiKit/Format.js"></script>
+				<script type="text/javascript" src="/MochiKit/Async.js"></script>
+				<script type="text/javascript" src="/MochiKit/DOM.js"></script>
+				<script type="text/javascript" src="/MochiKit/Style.js"></script>
+				<script type="text/javascript" src="/MochiKit/LoggingPane.js"></script>
+				<script type="text/javascript" src="/MochiKit/Color.js"></script>
+				<script type="text/javascript" src="/MochiKit/Signal.js"></script>
+				<script type="text/javascript" src="/MochiKit/Style.js"></script>
+				<script type="text/javascript" src="/MochiKit/Position.js"></script>
+				<script type="text/javascript" src="/MochiKit/Visual.js"></script>
+			
+				<script type="text/javascript" src="/SVGKit.js" ></script>
+				<script type="text/javascript" src="/SVGCanvas.js"></script>
+			
       </head>
       <body id="body">
         <div id="app">${content}</div>

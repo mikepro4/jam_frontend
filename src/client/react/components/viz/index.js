@@ -33,7 +33,7 @@ class Viz extends Component {
 			this.loadSettings()
 			this.startViz()
 		}
-		window.addEventListener("resize", this.handleResize);
+    window.addEventListener("resize", this.handleResize);
   }
 
 	componentWillUnmount = () => {
@@ -180,6 +180,9 @@ class Viz extends Component {
 	update = () => {
 		let points = this.generatePoints()
     this.renderFrame(this.refs.canvas.getContext('2d'), points)
+    setInterval(() => {
+      this.setupSVGCanvas(points)
+    }, 1000)
   }
 
 	renderOnce = (ctx, points) => {
@@ -234,6 +237,7 @@ class Viz extends Component {
 				ctx.fill();
       }
     }
+
   }
 
 	hexToRgb = (hex) => {
@@ -275,6 +279,19 @@ class Viz extends Component {
 		});
   }
 
+  setupSVGCanvas = (points) => {
+    var container = document.querySelector("#centered");
+    var svgkitContext = new SVGCanvas(this.state.width,this.state.height);
+    let element = document.getElementById("svgcanvas");
+    if(element) {
+      element.parentNode.removeChild(element);
+    }
+    svgkitContext.svg.svgElement.setAttribute("class", "example"); // just for styling
+    svgkitContext.svg.svgElement.setAttribute("id", "svgcanvas");
+    container.appendChild(svgkitContext.svg.svgElement);
+    this.renderOnce(svgkitContext, points)
+  }
+
 	render() {
 		return (
       <div 
@@ -291,6 +308,7 @@ class Viz extends Component {
           width={this.state.width}
           height={this.state.height}
         />
+        <div id="centered" style={{display: "none"}}></div>
       </div>
 		);
 	}

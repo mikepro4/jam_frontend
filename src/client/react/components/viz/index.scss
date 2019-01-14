@@ -19,3 +19,15 @@
     height: 100%;
   }
 }
+
+.example {
+  fill: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+
+  rect {
+    fill: none
+  }
+}
